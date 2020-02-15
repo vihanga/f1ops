@@ -1,0 +1,98 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "f1ops"
+version = "0.1.0"
+description = "Data-driven exploration of Formula 1 team logistics: travel routes, costs, emissions, and optimization"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "F1Ops Contributors"}
+]
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+]
+dependencies = [
+    "pandas==1.0.1",
+    "numpy==1.18.1",
+    "pydantic==1.4",
+    "geopy==1.21.0",
+    "shapely==1.7.0",
+    "folium==0.10.1",
+    "plotly==4.5.0",
+    "streamlit==0.54.0",
+    "ortools==7.5.7466",
+    "requests==2.23.0",
+    "jinja2==2.11.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==5.3.5",
+    "pytest-cov==2.8.1",
+    "black==19.10b0",
+    "isort==4.3.21",
+    "flake8==3.7.9",
+    "mypy==0.761",
+    "pre-commit==2.0.1",
+    "jupyter==1.0.0",
+    "matplotlib==3.1.3",
+    "seaborn==0.10.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  \.eggs
+  | \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_gitignore = true
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=src/f1ops --cov-report=html --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["src/f1ops"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
