@@ -1,0 +1,20 @@
+team_name,constructor_id,years_active,total_freight_tonnes,num_personnel,garage_equipment_tonnes,spare_parts_tonnes,hospitality_tonnes,team_base,country
+Red Bull Racing,red_bull,"2010-2019",118.0,65,38.0,32.0,48.0,Milton Keynes,United Kingdom
+Scuderia Ferrari,ferrari,"2010-2019",125.0,70,42.0,33.0,50.0,Maranello,Italy
+Mercedes AMG Petronas,mercedes,"2010-2019",120.0,68,40.0,30.0,50.0,Brackley,United Kingdom
+McLaren Racing,mclaren,"2010-2019",115.0,62,37.0,30.0,48.0,Woking,United Kingdom
+Williams Racing,williams,"2010-2019",113.0,58,36.0,30.0,47.0,Grove,United Kingdom
+Scuderia Toro Rosso,toro_rosso,"2010-2019",109.0,54,35.0,27.0,47.0,Faenza,Italy
+Force India F1 Team,force_india,"2010-2018",112.0,55,36.0,29.0,47.0,Silverstone,United Kingdom
+Sauber F1 Team,sauber,"2010-2018",111.0,55,36.0,28.0,47.0,Hinwil,Switzerland
+Renault F1 Team,renault,"2016-2019",115.0,59,37.0,30.0,48.0,Enstone,United Kingdom
+Racing Point F1 Team,racing_point,"2019",114.0,57,37.0,29.0,48.0,Silverstone,United Kingdom
+Alfa Romeo Racing,alfa_romeo,"2019",112.0,56,36.0,29.0,47.0,Hinwil,Switzerland
+Haas F1 Team,haas,"2016-2019",108.0,52,34.0,28.0,46.0,Kannapolis,United States
+Lotus F1 Team,lotus_f1,"2012-2015",116.0,60,38.0,30.0,48.0,Enstone,United Kingdom
+Caterham F1 Team,caterham,"2010-2014",105.0,48,33.0,26.0,46.0,Leafield,United Kingdom
+Marussia F1 Team,marussia,"2012-2014",104.0,47,32.0,26.0,46.0,Banbury,United Kingdom
+HRT F1 Team,hrt,"2010-2012",102.0,45,31.0,25.0,46.0,Madrid,Spain
+Team Lotus,team_lotus,"2010-2011",106.0,49,33.0,27.0,46.0,Hingham,United Kingdom
+Virgin Racing,virgin,"2010-2011",103.0,46,32.0,25.0,46.0,Dinnington,United Kingdom
+Manor Racing,manor,"2015-2016",104.0,47,32.0,26.0,46.0,Banbury,United Kingdom
