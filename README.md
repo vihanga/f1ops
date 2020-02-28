@@ -9,6 +9,7 @@ A data-driven exploration of Formula 1 team logistics across the European season
 - **Emissions Tracking**: CO2e emissions for road freight
 - **Fleet Optimization**: Simple greedy heuristics for truck allocation
 - **Interactive Dashboard**: Streamlit web app with maps, charts, and KPIs
+- **Jupyter Notebooks**: Exploratory data analysis and visualization notebooks
 - **Report Export**: CSV export for analysis results
 
 ## Quick Start
@@ -44,6 +45,19 @@ streamlit run src/f1ops/app.py
 ```bash
 make test
 ```
+
+### Explore Analysis Notebooks
+
+```bash
+jupyter notebook notebooks/
+```
+
+Notebooks included:
+- `01_data_ingestion.ipynb` - Load and explore F1 calendar data
+- `02_route_estimation.ipynb` - Haversine distance calculations
+- `03_cost_emissions.ipynb` - Cost and emissions modeling
+- `04_optimization.ipynb` - Fleet allocation strategies
+- `05_visualization.ipynb` - Interactive maps and charts
 
 ## Configuration
 
@@ -86,6 +100,7 @@ f1ops/
 │   ├── optimize.py      # Fleet optimization
 │   ├── viz.py           # Visualization utilities
 │   └── app.py           # Streamlit dashboard
+├── notebooks/           # Jupyter notebooks for analysis
 ├── data/                # Calendar and circuit data
 ├── scripts/             # Utility scripts
 ├── tests/               # Unit tests
