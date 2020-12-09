@@ -1,0 +1,9 @@
+round,race_name,circuit_name,city,country,race_date,latitude,longitude
+1,Austria Grand Prix,Red Bull Ring,Spielberg,Austria,2020-07-05,47.22,14.76
+2,Hungary Grand Prix,Hungaroring,Budapest,Hungary,2020-07-19,47.58,19.25
+3,United Kingdom Grand Prix,Silverstone Circuit,Silverstone,United Kingdom,2020-08-02,52.07,-1.02
+4,Spain Grand Prix,Circuit de Barcelona-Catalunya,Barcelona,Spain,2020-08-16,41.57,2.26
+5,Belgium Grand Prix,Circuit de Spa-Francorchamps,Spa,Belgium,2020-08-30,50.44,5.97
+6,Italy Grand Prix,Autodromo Nazionale di Monza,Monza,Italy,2020-09-06,45.62,9.29
+7,Russia Grand Prix,Sochi Autodrom,Sochi,Russia,2020-09-27,43.41,39.96
+8,Italy Grand Prix,Autodromo Enzo e Dino Ferrari,Imola,Italy,2020-11-01,44.34,11.71
