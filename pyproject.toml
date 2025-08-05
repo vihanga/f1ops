@@ -1,87 +1,131 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=75.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "f1ops"
-version = "0.1.0"
-description = "Data-driven exploration of Formula 1 team logistics: travel routes, costs, emissions, and optimization"
+version = "1.0.0"
+description = "AI-powered Formula 1 team logistics optimization"
 readme = "README.md"
+requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [
     {name = "F1Ops Contributors"}
 ]
-requires-python = ">=3.8"
+keywords = ["f1", "formula1", "logistics", "optimization", "machine-learning", "reinforcement-learning"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
 ]
+
 dependencies = [
-    "pandas==1.0.1",
-    "numpy==1.18.1",
-    "pydantic==1.4",
-    "geopy==1.21.0",
-    "shapely==1.7.0",
-    "folium==0.10.1",
-    "plotly==4.5.0",
-    "streamlit==0.54.0",
-    "ortools==7.5.7466",
-    "requests==2.23.0",
-    "jinja2==2.11.1",
+    # Core data science
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "pydantic>=2.8.0",
+
+    # Web & Visualization
+    "streamlit>=1.37.0",
+    "plotly>=5.23.0",
+    "folium>=0.17.0",
+
+    # Classical ML
+    "scikit-learn>=1.5.0",
+
+    # Gradient Boosting
+    "xgboost>=2.1.0",
+    "lightgbm>=4.5.0",
+
+    # Hyperparameter Optimization
+    "optuna>=3.6.0",
+
+    # Explainability
+    "shap>=0.46.0",
+
+    # Optimization
+    "ortools>=9.10.0",
+
+    # Deep Learning & RL
+    "torch>=2.4.0",
+    "stable-baselines3>=2.3.0",
+    "gymnasium>=0.29.0",
+
+    # Time Series
+    "prophet>=1.1.0",
+    "statsmodels>=0.14.0",
+
+    # MLOps
+    "mlflow>=2.15.0",
+
+    # Utilities
+    "geopy>=2.4.0",
+    "requests>=2.32.0",
+    "python-dotenv>=1.0.0",
+    "tqdm>=4.66.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest==5.3.5",
-    "pytest-cov==2.8.1",
-    "black==19.10b0",
-    "isort==4.3.21",
-    "flake8==3.7.9",
-    "mypy==0.761",
-    "pre-commit==2.0.1",
-    "jupyter==1.0.0",
-    "matplotlib==3.1.3",
-    "seaborn==0.10.0",
+    "pytest>=8.3.0",
+    "pytest-cov>=5.0.0",
+    "pytest-asyncio>=0.24.0",
+    "hypothesis>=6.111.0",
+    "ruff>=0.6.0",
+    "mypy>=1.11.0",
 ]
 
-[tool.black]
-line-length = 88
-target-version = ['py38']
-include = '\.pyi?$'
-extend-exclude = '''
-/(
-  \.eggs
-  | \.git
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
+notebook = [
+    "jupyter>=1.0.0",
+    "ipykernel>=6.29.0",
+    "ipywidgets>=8.1.0",
+    "matplotlib>=3.9.0",
+    "seaborn>=0.13.0",
+]
 
-[tool.isort]
-profile = "black"
-line_length = 100
-skip_gitignore = true
+api = [
+    "fastapi>=0.112.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic-settings>=2.4.0",
+]
 
-[tool.mypy]
-python_version = "3.8"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-ignore_missing_imports = true
+all = [
+    "f1ops[dev,notebook,api]",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/f1ops"
+Documentation = "https://github.com/yourusername/f1ops#readme"
+Repository = "https://github.com/yourusername/f1ops"
+Issues = "https://github.com/yourusername/f1ops/issues"
+
+[project.scripts]
+f1ops = "f1ops.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+f1ops = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = "-v --cov=src/f1ops --cov-report=html --cov-report=term-missing"
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = [
+    "--verbose",
+    "--cov=src/f1ops",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
 
 [tool.coverage.run]
 source = ["src/f1ops"]
@@ -95,4 +139,53 @@ exclude_lines = [
     "raise NotImplementedError",
     "if __name__ == .__main__.:",
     "if TYPE_CHECKING:",
+    "@abstractmethod",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "B008",  # do not perform function calls in argument defaults
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # unused imports
+"tests/*" = ["B011"]  # assert False
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_any_generics = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = [
+    "folium.*",
+    "streamlit.*",
+    "plotly.*",
+    "ortools.*",
+    "stable_baselines3.*",
+    "prophet.*",
+    "mlflow.*",
+]
+ignore_missing_imports = true
