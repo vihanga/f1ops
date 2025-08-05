@@ -1,0 +1,10 @@
+round,race_name,circuit_name,city,country,race_date,latitude,longitude
+5,Spanish Grand Prix,Circuit de Barcelona-Catalunya,Montmeló,Spain,2019-05-12,41.57,2.2611
+6,Monaco Grand Prix,Circuit de Monaco,Monte Carlo,Monaco,2019-05-26,43.7347,7.4206
+8,French Grand Prix,Circuit Paul Ricard,Le Castellet,France,2019-06-23,43.2506,5.7919
+9,Austrian Grand Prix,Red Bull Ring,Spielberg,Austria,2019-06-30,47.2197,14.7647
+10,British Grand Prix,Silverstone Circuit,Silverstone,UK,2019-07-14,52.0786,-1.0169
+11,German Grand Prix,Hockenheimring,Hockenheim,Germany,2019-07-28,49.3278,8.5656
+12,Hungarian Grand Prix,Hungaroring,Budapest,Hungary,2019-08-04,47.5818,19.2511
+13,Belgian Grand Prix,Spa-Francorchamps,Spa,Belgium,2019-09-01,50.4372,5.9714
+14,Italian Grand Prix,Autodromo Nazionale di Monza,Monza,Italy,2019-09-08,45.6205,9.2814

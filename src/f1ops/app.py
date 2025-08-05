@@ -2,6 +2,12 @@
 
 import streamlit as st
 
+# Compatibility shim for Streamlit versions
+# v0.54 (Feb 2020) used st.beta_expander
+# Later versions use st.expander
+if not hasattr(st, 'beta_expander'):
+    st.beta_expander = st.expander
+
 from f1ops import __version__
 from f1ops.config import DEFAULT_COST_PARAMS, DEFAULT_EMISSIONS_PARAMS
 from f1ops.cost import calculate_leg_cost, calculate_season_cost, estimate_travel_hours
