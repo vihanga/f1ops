@@ -1,9 +1,9 @@
 """Pydantic data models for F1Ops."""
 
 from datetime import date
-from typing import List, Optional
+from typing import Any, List
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class Circuit(BaseModel):
@@ -15,7 +15,8 @@ class Circuit(BaseModel):
     latitude: float = Field(..., ge=-90, le=90)
     longitude: float = Field(..., ge=-180, le=180)
 
-    @validator("latitude", "longitude")
+    @field_validator("latitude", "longitude")
+    @classmethod
     def validate_coordinates(cls, v: float) -> float:
         """Validate coordinate values."""
         if not isinstance(v, (int, float)):
@@ -32,7 +33,8 @@ class RaceEvent(BaseModel):
     circuit: Circuit
     race_date: date
 
-    @validator("season")
+    @field_validator("season")
+    @classmethod
     def validate_season(cls, v: int) -> int:
         """Validate season year."""
         if v < 1950:
@@ -52,6 +54,16 @@ class Leg(BaseModel):
     def leg_name(self) -> str:
         """Generate a human-readable leg name."""
         return f"{self.from_circuit.city} → {self.to_circuit.city}"
+
+    @property
+    def from_location(self) -> Circuit:
+        """Alias for compatibility."""
+        return self.from_circuit
+
+    @property
+    def to_location(self) -> Circuit:
+        """Alias for compatibility."""
+        return self.to_circuit
 
 
 class CostBreakdown(BaseModel):
