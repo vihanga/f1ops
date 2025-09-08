@@ -1,10 +1,58 @@
 """Optimization module for route and fleet allocation."""
 
-from typing import Dict, List
+from typing import Dict, List, Any
 
 from f1ops.config import DEFAULT_COST_PARAMS, OPTIMIZATION_PARAMS
 from f1ops.cost import calculate_leg_cost, calculate_season_cost
 from f1ops.data_models import Leg, LegAnalysis, OptimizationResult
+
+
+def greedy_truck_allocation_bin_packing(
+    cargo_items: List[Dict[str, Any]],
+    num_trucks: int,
+    truck_capacity_kg: float,
+) -> Dict[int, List[Dict[str, Any]]]:
+    """
+    Greedy First-Fit Decreasing bin packing algorithm for cargo allocation.
+
+    Allocates cargo items to trucks to minimize wasted capacity.
+
+    Args:
+        cargo_items: List of dicts with 'name' and 'weight_kg' keys
+        num_trucks: Number of available trucks
+        truck_capacity_kg: Maximum capacity per truck in kg
+
+    Returns:
+        Dictionary mapping truck_id (1-indexed) to list of cargo items
+
+    Raises:
+        ValueError: If items cannot fit in available trucks
+    """
+    # Sort items by weight (descending) for FFD algorithm
+    sorted_items = sorted(cargo_items, key=lambda x: x['weight_kg'], reverse=True)
+
+    # Initialize trucks
+    trucks = {i: [] for i in range(1, num_trucks + 1)}
+    truck_loads = {i: 0.0 for i in range(1, num_trucks + 1)}
+
+    # Allocate each item to first truck with sufficient capacity
+    for item in sorted_items:
+        allocated = False
+
+        for truck_id in range(1, num_trucks + 1):
+            if truck_loads[truck_id] + item['weight_kg'] <= truck_capacity_kg:
+                trucks[truck_id].append(item)
+                truck_loads[truck_id] += item['weight_kg']
+                allocated = True
+                break
+
+        if not allocated:
+            raise ValueError(
+                f"Cannot allocate item '{item['name']}' ({item['weight_kg']} kg). "
+                f"No truck has sufficient remaining capacity."
+            )
+
+    return trucks
 
 
 def greedy_truck_allocation(

@@ -1,0 +1,78 @@
+name: Render Jupyter Notebooks
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'notebooks/**'
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+          pip install nbconvert jupyter
+
+      - name: Convert notebooks to HTML
+        run: |
+          mkdir -p docs/notebooks
+          for nb in notebooks/*.ipynb; do
+            jupyter nbconvert --to html --output-dir docs/notebooks "$nb"
+          done
+
+      - name: Generate index page
+        run: |
+          cat > docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>F1Ops Notebooks</title>
+            <style>
+              body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+              h1 { color: #e10600; }
+              .notebook-list { list-style-type: none; padding: 0; }
+              .notebook-list li { margin: 15px 0; }
+              .notebook-list a {
+                display: block;
+                padding: 15px;
+                background: #f5f5f5;
+                text-decoration: none;
+                color: #333;
+                border-left: 4px solid #e10600;
+              }
+              .notebook-list a:hover { background: #e0e0e0; }
+            </style>
+          </head>
+          <body>
+            <h1>🏎️ F1Ops Interactive Notebooks</h1>
+            <p>Explore F1 team logistics analysis through interactive Jupyter notebooks.</p>
+            <ul class="notebook-list">
+              <li><a href="notebooks/01_data_ingestion.html">01 - Data Ingestion & Exploration</a></li>
+              <li><a href="notebooks/02_route_estimation.html">02 - Route Distance Estimation</a></li>
+              <li><a href="notebooks/03_cost_emissions.html">03 - Cost & Emissions Analysis</a></li>
+              <li><a href="notebooks/04_optimization.html">04 - Fleet Optimization</a></li>
+              <li><a href="notebooks/05_visualization.html">05 - Visualization & Reporting</a></li>
+            </ul>
+            <p><a href="https://github.com/vihanga/f1ops">← Back to GitHub Repository</a></p>
+          </body>
+          </html>
+          EOF
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
