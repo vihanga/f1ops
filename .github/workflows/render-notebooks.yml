@@ -10,6 +10,8 @@ on:
 jobs:
   render:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -64,6 +66,7 @@ jobs:
               <li><a href="notebooks/03_cost_emissions.html">03 - Cost & Emissions Analysis</a></li>
               <li><a href="notebooks/04_optimization.html">04 - Fleet Optimization</a></li>
               <li><a href="notebooks/05_visualization.html">05 - Visualization & Reporting</a></li>
+              <li><a href="notebooks/06_time_series_forecasting.html">06 - Time Series Forecasting (NEW)</a></li>
             </ul>
             <p><a href="https://github.com/vihanga/f1ops">← Back to GitHub Repository</a></p>
           </body>
